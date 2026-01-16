@@ -76,12 +76,12 @@
 
   socket.on("new_tip", (data) => {
     userEl.innerText = data.username;
-    amountEl.innerText = `tipped ${data.amount} tokens`;
+    amountEl.innerText = `tipped ${data.amount} Rupee Thru`;
     messageEl.innerText = data.message || "";
 
     popup.style.display = "block";
 
-    const text = `${data.username} tipped ${data.amount} tokens. ${data.message || ""}`;
+    const text = `${data.username} tipped ${data.amount} rupee through xdtip. ${data.message || ""}`;
 
     const utterance = new SpeechSynthesisUtterance(text);
 
