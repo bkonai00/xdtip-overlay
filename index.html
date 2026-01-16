@@ -81,7 +81,7 @@
 
     popup.style.display = "block";
 
-    const text = `${data.username} tipped ${data.amount} rupee through xdtip. ${data.message || ""}`;
+    const text = `${data.username} tipped ${data.amount} rupee and says. ${data.message || ""}`;
 
     const utterance = new SpeechSynthesisUtterance(text);
 
