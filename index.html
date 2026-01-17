@@ -67,25 +67,26 @@
 
   const socket = io("https://xdtip-backend.onrender.com");
 
-  socket.emit("join_creator", creator);
+  socket.on("connect", () => {
+    socket.emit("join_creator", creator);
+    console.log("Joined creator room:", creator);
+  });
 
   const popup = document.getElementById("popup");
   const userEl = document.getElementById("user");
   const amountEl = document.getElementById("amount");
   const messageEl = document.getElementById("message");
 
-  socket.on("new_tip", (data) => {
-    userEl.innerText = data.username;
-    amountEl.innerText = `tipped ${data.amount} Rupee Thru`;
+  socket.on("new-tip", (data) => {
+    userEl.innerText = data.from;
+    amountEl.innerText = `tipped ${data.amount} tokens`;
     messageEl.innerText = data.message || "";
 
     popup.style.display = "block";
 
-    const text = `${data.username} tipped ${data.amount} rupee and says. ${data.message || ""}`;
+    const text = `${data.from} tipped ${data.amount} tokens and says ${data.message || ""}`;
 
     const utterance = new SpeechSynthesisUtterance(text);
-
-    // Auto language handling (English / Hindi / Hinglish)
     utterance.lang = /[\u0900-\u097F]/.test(text) ? "hi-IN" : "en-IN";
 
     speechSynthesis.cancel();
@@ -96,6 +97,7 @@
     };
   });
 </script>
+
 
 </body>
 </html>
